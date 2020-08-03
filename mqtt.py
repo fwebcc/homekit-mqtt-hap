@@ -24,12 +24,12 @@ logging.basicConfig(level=logging.INFO, format="[%(module)s] %(message)s")
 
 hostpath =os.getcwd()
 def json_rate(file):
-    CONF_PATH=hostpath+'/cmdapi/'+file
+    CONF_PATH=hostpath+file
     CONFS = json.load(open(CONF_PATH))
     return CONFS
 
-mqtt_conf=json_rate("usermqtt.json")
-conf=json_rate("conf.json")
+mqtt_conf=json_rate("confing.json")
+
 
 mqtt = mqtt.Client("python")
 # 连接MQTT服务器
@@ -264,18 +264,15 @@ class cmqtt(Accessory):
 
                             char_door=self.add_preload_service('GarageDoorOpener')
                             self.char_lock=char_door.configure_char('TargetDoorState') 
-                            #self.char_stat1=self.get_service('GarageDoorOpener')
-                            #self.char_stat=self.char_stat1.get_characteristic('CurrentDoorState')
-                            print('门锁0000000000')
+
                             if str(msg.payload.upper(), "utf-8")==str(cmdon).upper():
                                 self.char_lock.set_value(0)
-                                print('开门9999999')
+
                                 self.get_service('GarageDoorOpener')\
                                     .get_characteristic('CurrentDoorState')\
                                     .set_value(0)
                             else:
                                 self.char_lock.set_value(1)
-                                print('关门9999999')
                                 self.get_service('GarageDoorOpener')\
                                     .get_characteristic('CurrentDoorState')\
                                     .set_value(1)
