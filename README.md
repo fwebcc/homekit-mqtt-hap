@@ -9,4 +9,4 @@ MQTT自动接受状态,需要MQTT支持监控#符号主题
 
 python3.5以上版本
 
-更多联系http://fweb.cc/SWEB/Service/help/
+更多参考http://fweb.cc/SWEB/Service/help/
